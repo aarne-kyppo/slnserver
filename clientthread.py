@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 __author__ = 'aarnek'
 from threading import Thread
-import socket
+import logindata
 import psycopg2 as ps
 from haversine import haversine
 
@@ -15,7 +15,8 @@ class ClientThread(Thread):
         self.client = client
         self.server = server
         self.coords = []
-        self.conn = ps.connect('dbname=testi user=postgres password=bRewa5UD')
+        self.conn = ps.connect(database=logindata.db, user=logindata.user, password=logindata.password,
+                               host=logindata.host)
         self.cur = self.conn.cursor()
         self.dist = 2000
         self.multiplier = 2
